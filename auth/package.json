@@ -6,6 +6,9 @@
   "scripts": {
     "start": "node -r module-alias/register dist/index.js",
     "build": "rimraf dist && tsc -p tsconfig-build.json",
+    "debug": "nodemon -L --watch ./dist --inspect=0.0.0.0:9222 --no-lazy -r module-alias/register dist/index.js",
+    "up": "npm run build && docker-compose up -d",
+    "down": "docker-compose down",
     "dev": "ts-node-dev -r tsconfig-paths/register ./src/index.ts",
     "test": "cross-env LOG_DISABLED=true NODE_OPTIONS=--experimental-vm-modules jest --passWithNoTests --runInBand --no-cache",
     "test:unit": "npm test -- --watchAll tests/unit",
@@ -41,7 +44,8 @@
   },
   "dependencies": {
     "express": "^4.17.3",
-    "module-alias": "^2.2.2"
+    "module-alias": "^2.2.2",
+    "nodemon": "^2.0.18"
   },
   "engines": {
     "node": "17"
